@@ -1,0 +1,5 @@
+[SERVER CONF]
+server address = 127.0.0.1:8000
+tv width = 1920
+tv height = 1080
+key = KzK9UmPhOMLbGJjELNxN9eBSC1mZGhgRGjLtvCxNh8nLubj3
