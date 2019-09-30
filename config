@@ -1,5 +1,10 @@
 [SERVER CONF]
-server address = 127.0.0.1:8000
-tv width = 1920
-tv height = 1080
+server address = 192.168.1.4:8000
 key = KzK9UmPhOMLbGJjELNxN9eBSC1mZGhgRGjLtvCxNh8nLubj3
+update interval = 30
+
+[SCREEN CONF]
+width = 1920
+height = 1080
+current video = Show_1569821081.mp4
+
