@@ -22,14 +22,15 @@ from pathlib import Path
 # configuration parser library, included as part of python
 # https://docs.python.org/3/library/configparser.html
 import configparser
-import time, datetime, pytz, os, requests, random, string, shutil
+import time, datetime, pytz, os, sys, requests, random, string, shutil
 
 # use HDMI CEC to control the TV:
 # https://www.linuxuprising.com/2019/07/raspberry-pi-power-on-off-tv-connected.html
 
-def main_prog():
+def main_prog(workingDir = '/home/pi/SimpleViewer/simpleviewer/'):
     print("starting player")
-
+    # change CWD to the directory where the main routine is found
+    os.chdir(os.path.join(workingDir))
     # load configuration
     config = conf_load()
 
@@ -188,4 +189,10 @@ def cec_control(state = 'Off'):
         tv.power_on()
 
 if __name__ == "__main__":
-    main_prog()
+    # use system arg var to be the working directory:
+    try:
+        specifiedDir = sys.argv[1]
+        main_prog(workingDir = specifiedDir)
+    except:
+        print('No Directory Specified, using default.\n To change form default, specify the directory where \"main.py\" resides: ~$ ./main.py /path/to/main/')
+        main_prog() # now just call the main program

@@ -6,7 +6,7 @@ update interval (seconds) = 30
 [SCREEN CONF]
 width = 1920
 height = 1080
-current video = Show_1571000620.mp4
+current video = Show_1571637538.mp4
 
 [SCHEDULE]
 use cec = False
