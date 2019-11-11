@@ -188,8 +188,8 @@ def play_video():
     print("File to play:", video_to_play)
     try: # start the player
         player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
-    except:
-        pass
+    except Exception as e:
+        print('play_video, omxplayer:', e)
 
     while True:
         thereIsNewVid, filename = check_for_new()
