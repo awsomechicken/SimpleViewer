@@ -1,6 +1,6 @@
 [SERVER CONF]
 server address = 192.168.1.4:8000
-key = KzK9UmPhOMLbGJjELNxN9eBSC1mZGhgRGjLtvCxNh8nLubj3
+key = YduSd5eE0cG8ce1yw2ugVnXm4GTlHRlvAylaXAazJ1PQDXuv
 update interval (seconds) = 30
 
 [SCREEN CONF]
@@ -9,8 +9,8 @@ height = 1080
 current video = Show_1571637538.mp4
 
 [SCHEDULE]
-use cec = False
+use cec = True
 timezone = America/Los_Angeles
-turn on = 21:40:30
-turn off = 21:50:00
+turn on = 08:00:00
+turn off = 22:15:00
 
