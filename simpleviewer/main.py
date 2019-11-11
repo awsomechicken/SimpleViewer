@@ -186,10 +186,10 @@ def play_video():
     height = config['SCREEN CONF']['Height']
     video_to_play = config['SCREEN CONF']['current video']
     print("File to play:", video_to_play)
-    try: # start the player
-        player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
-    except Exception as e:
-        print('play_video, omxplayer:', e)
+    #try: # start the player
+    player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
+    #except Exception as e:
+    #    print('play_video, omxplayer:', e)
 
     while True:
         thereIsNewVid, filename = check_for_new()
