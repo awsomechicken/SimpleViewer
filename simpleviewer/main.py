@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Main program for displaying the signage videos
-# Simple Signasge project
+# Simple Signage project
 
 # using omxplayer-wrapper
 try:
