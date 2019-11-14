@@ -233,14 +233,17 @@ def tv_control(): # cec-based TV control / schedule
 
 
 def cec_control(state = 'Off'):
-    #print('TV is on?', tv.is_on())
-    if tv.is_on() and (state == 'Off' or state == 'off'):
-        #print("Turning the TV Off")
-        tv.standby()
+    try:
+        #print('TV is on?', tv.is_on())
+        if tv.is_on() and (state == 'Off' or state == 'off'):
+            #print("Turning the TV Off")
+            tv.standby()
 
-    if (not tv.is_on()) and (state == 'On' or state == 'on'):
-        #print("Turning the TV On")
-        tv.power_on()
+        if (not tv.is_on()) and (state == 'On' or state == 'on'):
+            #print("Turning the TV On")
+            tv.power_on()
+    except OSError as e:
+        print("TV Doesn't appear to support CEC, please disable it in the settings:\n", e)
 
 if __name__ == "__main__":
     # use system arg var to be the working directory:
