@@ -194,7 +194,7 @@ def play_video():
     while True:
         thereIsNewVid, filename = check_for_new()
         if thereIsNewVid:
-            done = get_video(config, filename) # get the new video
+            done = get_video(filename) # get the new video
             player.quit()
             video_to_play = filename
             player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
