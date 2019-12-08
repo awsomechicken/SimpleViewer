@@ -16,4 +16,5 @@ pip3 install git+https://github.com/trainman419/python-cec.git@0.2.7#egg=cec
 
 # call setup.py:
 cd setup_files
-sudo python3 setup.py
+python3 setup.py
+sudo python3 startup_cfg.py
