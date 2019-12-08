@@ -6,8 +6,7 @@
 try:
     from omxplayer.player import OMXPlayer
 except Exception as e:
-    if(debugging):
-        print("OMXPlayer wrapper not found, please install: \n\t~$ pip3 install omxplayer-wrapper\n\nSee:\n\thttps://python-omxplayer-wrapper.readthedocs.io/en/latest/")
+    print("OMXPlayer wrapper not found, please install: \n\t~$ pip3 install omxplayer-wrapper\n\nSee:\n\thttps://python-omxplayer-wrapper.readthedocs.io/en/latest/")
 
 # using python-CEC
 # https://github.com/trainman419/python-cec/
@@ -16,10 +15,8 @@ try:
     cec.init() # start the CEC daemon
     tv = cec.Device(cec.CECDEVICE_TV)
 except Exception as e:
-    if(debugging):
-        print("Python-CEC Not found, pleae install using the instructions found here:\n\thttps://github.com/trainman419/python-cec/")
-    if(debugging):
-        print("If install fails, the package may not be installed in PyPI yet, try installing using:\n\tpip install git+https://github.com/trainman419/python-cec.git@0.2.7#egg=cec")
+    print("Python-CEC Not found, pleae install using the instructions found here:\n\thttps://github.com/trainman419/python-cec/")
+    print("If install fails, the package may not be installed in PyPI yet, try installing using:\n\tpip install git+https://github.com/trainman419/python-cec.git@0.2.7#egg=cec")
 
 from pathlib import Path
 # configuration parser library, included as part of python
