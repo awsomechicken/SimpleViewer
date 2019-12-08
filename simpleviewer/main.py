@@ -132,7 +132,7 @@ def check_for_settings_change():
 
 def check_for_new():
     global config # get the global config object
-    #print("checking for new video")
+    print("checking for new video")
     serverHost = "http://%s/tv_check_for_new_content"%(config['SERVER CONF']['Server Address'])
     #print(serverHost)
     # add unique ID in the Screens menu for TVUID where the first couple of chars are username and the rest are a "password"
@@ -188,6 +188,12 @@ def play_video():
     height = config['SCREEN CONF']['Height']
     video_to_play = config['SCREEN CONF']['current video']
     print("File to play:", video_to_play)
+
+    # see if the video is real
+    if not os.path.is_file(video_to_play):
+        thereIsNewVid, filename = check_for_new()
+        get_video(filename)
+
     try: # start the player
         player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
     except Exception as e:
@@ -196,7 +202,7 @@ def play_video():
         thereIsNewVid, filename = check_for_new()
         if thereIsNewVid:
             done = get_video(filename) # get the new video
-
+            get_video(filename)
 
     while True:
         thereIsNewVid, filename = check_for_new()
@@ -218,7 +224,7 @@ def play_video():
 def tv_control(): # cec-based TV control / schedule
     global config # get the global config object
     #print("doing CEC tv control")
-    if config['SCHEDULE']['Use CEC'].lower() == 'true':
+    if config['SCHEDULE']['Use CEC'].lower() == 'true' or config['SCHEDULE']['Use CEC'] == True:
         timezone = config['SCHEDULE']['timezone'] # get the timezone from the config
         # check the time
         utc_now = pytz.utc.localize(datetime.datetime.utcnow())
