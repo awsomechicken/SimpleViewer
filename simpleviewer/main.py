@@ -204,7 +204,8 @@ def play_video():
             done = get_video(filename) # get the new video
             player.quit()
             video_to_play = filename
-            player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
+            player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop', -'--layer', '1'])
+            print("File to play:", video_to_play)
 
         check_for_settings_change() # check the server for updated settings
         tv_control() # use the CEC connection to setup a schedule
