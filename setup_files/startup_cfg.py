@@ -9,7 +9,7 @@ def make_startup():
 
     # the exit 0 is ALways at the end, replace it with a string being sure to add exit 0 to the end of the new string:
 
-    startup = "nohup python3 /home/pi/SimpleViewer/simpleviewer/main.py /home/pi/SimpleViewer/simpleviewer/ > /home/pi/simpleviewer.out 2>/home/pi/simpleviewer.err < /dev/null &\n\nexit 0"
+    startup = "nohup /home/pi/SimpleViewer/simpleviewer/startup.sh\n\nexit 0"
 
     rc_local.replace("exit 0", startup)
 
@@ -17,7 +17,7 @@ def make_startup():
         rc.write(rc_local)
         rc.close()
 
-    print("autostart configuretion complete, please reboot your pi, and don't forget to update passwords")
+    print("autostart configuration complete, please reboot your pi, and don't forget to update passwords")
 
 
 if __name__ == "__main__":
