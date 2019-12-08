@@ -190,7 +190,7 @@ def play_video():
     print("File to play:", video_to_play)
 
     # see if the video is real
-    if not os.path.is_file(video_to_play):
+    if not os.path.isfile(video_to_play):
         thereIsNewVid, filename = check_for_new()
         get_video(filename)
 
