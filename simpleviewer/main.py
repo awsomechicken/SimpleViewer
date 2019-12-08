@@ -45,15 +45,15 @@ def main_prog(workingDir = '/home/pi/SimpleViewer/simpleviewer/'):
     # load configuration
     config = conf_load()
 
-    if not(config == None):
-        # check the configuration, suggest error fix
-        print(config['SERVER CONF']['Server Address'])
-        # quirie the server
-        thereIsNewVid, filename = check_for_new()
-        if thereIsNewVid:
-            done = get_video(filename) # get the new video
-        # begin!
-        play_video()
+    #if not(config == None):
+    # check the configuration, suggest error fix
+    print(config['SERVER CONF']['Server Address'])
+    # quirie the server
+    thereIsNewVid, filename = check_for_new()
+    if thereIsNewVid:
+        done = get_video(filename) # get the new video
+    # begin!
+    play_video()
 
 # Workers ______________________________________________________________________
 def conf_load():
