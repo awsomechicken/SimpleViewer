@@ -225,7 +225,7 @@ def play_video():
 def tv_control(): # cec-based TV control / schedule
     global config # get the global config object
     #print("doing CEC tv control")
-    if config['SCHEDULE']['Use CEC'].lower() == 'true' or config['SCHEDULE']['Use CEC'] == True:
+    if config['SCHEDULE']['Use CEC'].lower() == 'true':
         timezone = config['SCHEDULE']['timezone'] # get the timezone from the config
         # check the time
         utc_now = pytz.utc.localize(datetime.datetime.utcnow())
