@@ -13,3 +13,7 @@ pip3 install pytz
 pip3 install configparser
 pip3 install omxplayer-wrapper
 pip3 install git+https://github.com/trainman419/python-cec.git@0.2.7#egg=cec
+
+# call setup.py:
+cd setup_files
+python3 setup.py
