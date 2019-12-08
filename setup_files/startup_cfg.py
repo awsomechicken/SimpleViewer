@@ -11,7 +11,7 @@ def make_startup():
 
     startup = "nohup /home/pi/SimpleViewer/simpleviewer/startup.sh\n\nexit 0"
 
-    rc_local.replace("exit 0", startup)
+    rc_local = rc_local.replace("exit 0", startup)
 
     with open("/etc/rc.local", "w") as rc:
         rc.write(rc_local)
