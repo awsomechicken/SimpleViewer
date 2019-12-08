@@ -193,6 +193,7 @@ def play_video():
     if not os.path.isfile(video_to_play):
         thereIsNewVid, filename = check_for_new()
         get_video(filename)
+        video_to_play = config['SCREEN CONF']['current video']
 
     try: # start the player
         player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
