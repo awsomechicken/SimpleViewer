@@ -214,13 +214,13 @@ def play_video():
 
 def tv_control(): # cec-based TV control / schedule
     global config # get the global config object
-    print("doing CEC tv control")
+    #print("doing CEC tv control")
     if config['SCHEDULE']['Use CEC'].lower() == 'true':
         timezone = config['SCHEDULE']['timezone'] # get the timezone from the config
         # check the time
         utc_now = pytz.utc.localize(datetime.datetime.utcnow())
         locale_now = utc_now.astimezone(pytz.timezone(timezone)) # localize the time
-        print("Current time:", locale_now.time())
+        #print("Current time:", locale_now.time())
 
         # get the schedule times as datetime objects:
         onTime = datetime.datetime.strptime(config['SCHEDULE']['Turn On'], '%H:%M:%S')
