@@ -39,8 +39,7 @@ debugging = False
 # Main _________________________________________________________________________
 
 def main_prog(workingDir = '/home/pi/SimpleViewer/simpleviewer/'):
-    if(debugging):
-        print("starting player")
+    print("starting player")
     # change CWD to the directory where the main routine is found
     os.chdir(os.path.join(workingDir))
     # load configuration
@@ -48,8 +47,7 @@ def main_prog(workingDir = '/home/pi/SimpleViewer/simpleviewer/'):
 
     if not(config == None):
         # check the configuration, suggest error fix
-        if(debugging):
-            print(config['SERVER CONF']['Server Address'])
+        print(config['SERVER CONF']['Server Address'])
         # quirie the server
         thereIsNewVid, filename = check_for_new()
         if thereIsNewVid:
@@ -59,13 +57,10 @@ def main_prog(workingDir = '/home/pi/SimpleViewer/simpleviewer/'):
 
 # Workers ______________________________________________________________________
 
-def conf_load():
-    if(debugging):
-        print("load conf")
+    print("load conf")
     global config
     confPath = Path("./config")
-    if(debugging):
-        print("Conf path exists:", os.path.exists(confPath))
+    print("Conf path exists:", os.path.exists(confPath))
     if os.path.exists(confPath):
     # read the configuration file
         config.read(confPath)
@@ -95,8 +90,7 @@ def conf_load():
         }
 
         save_config(config) #
-        if(debugging):
-            print("No config found, new config created; please go fill it in:\n\t", os.getcwd()+"/config")
+        print("No config found, new config created; please go fill it in:\n\t", os.getcwd()+"/config")
         #conf = conf_load() # recurse
         return None # return Null to kill the program
 
@@ -117,13 +111,11 @@ def check_for_settings_change():
     try:
         resp = requests.get(serverHost, params=deets)
         servedInformation = resp.text
-        if(debugging):
-            print("served:", servedInformation)
+        #print("served:", servedInformation)
 
         # load the json string into a dict
         new_conf = json.loads(servedInformation)
-        if(debugging):
-            print(new_conf)
+        #print(new_conf)
 
         # transfer the parameters from the server to the current configuration
         #global config # say the global config object
@@ -136,19 +128,16 @@ def check_for_settings_change():
         save_config(config) # save the new configuration from the erver
 
     except Exception as e:
-        if(debugging):
-            print("Check settings:", e)
+        print("Check settings:", e)
 
 
 
 
 def check_for_new():
     global config # get the global config object
-    if(debugging):
-        print("checking for new video")
+    #print("checking for new video")
     serverHost = "http://%s/tv_check_for_new_content"%(config['SERVER CONF']['Server Address'])
-    if(debugging):
-        print(serverHost)
+    #print(serverHost)
     # add unique ID in the Screens menu for TVUID where the first couple of chars are username and the rest are a "password"
     # for use in the auth section of a response
     servedFileName = ''
@@ -157,26 +146,22 @@ def check_for_new():
     try:
         resp = requests.get(serverHost, params=deets)
         servedFileName = resp.text
-        if(debugging):
-            print("served:", servedFileName)
+        #print("served:", servedFileName)
 
     except:
-        if(debugging):
-            print("Check Videos: Server not available")
+        print("Check Videos: Server not available")
 
     if len(servedFileName) > 0:
         isThereNew = not os.path.exists(servedFileName) # boolean for if there is new video
     else:
         isThereNew = False # otherwise there isn't a new video
-    if(debugging):
-        print("have we new file?", isThereNew)
+    #print("have we new file?", isThereNew)
     return isThereNew, servedFileName # return the name of the newest file
 
 
 def get_video(localFileName):
     global config # get the global config object
-    if(debugging):
-        print("getting video from server")
+    print("getting video from server")
     serverHost = "http://%s/tv_get_new_content"%(config['SERVER CONF']['Server Address'])
     deets = {'auth_token':config['SERVER CONF']['key']} # details for getting a response from the server
     # using RAW and shutil
@@ -190,8 +175,7 @@ def get_video(localFileName):
         old_video = config['SCREEN CONF']['current video']
         os.remove(old_video)
     except:
-        if(debugging):
-            print('nothing to delete')
+        print('nothing to delete')
     # and add the new file to the config:
     config['SCREEN CONF']['current video'] = localFileName
     save_config(config) # save the config
@@ -201,19 +185,16 @@ def get_video(localFileName):
 
 def play_video():
     global config # get the global config object
-    if(debugging):
-        print("starting presentation")
+    print("starting presentation")
     # omxplayer -o hdmi _-eQ_8F4nzyiw.mp4 --win '0 0 1920 1080' --loop
     width = config['SCREEN CONF']['Width']
     height = config['SCREEN CONF']['Height']
     video_to_play = config['SCREEN CONF']['current video']
-    if(debugging):
-        print("File to play:", video_to_play)
+    print("File to play:", video_to_play)
     #try: # start the player
     player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
     #except Exception as e:
-    if(debugging):
-        print('play_video, omxplayer:', e)
+    print('play_video, omxplayer:', e)
 
     while True:
         thereIsNewVid, filename = check_for_new()
@@ -233,15 +214,13 @@ def play_video():
 
 def tv_control(): # cec-based TV control / schedule
     global config # get the global config object
-    if(debugging):
-        print("doing CEC tv control")
+    print("doing CEC tv control")
     if config['SCHEDULE']['Use CEC'].lower() == 'true':
         timezone = config['SCHEDULE']['timezone'] # get the timezone from the config
         # check the time
         utc_now = pytz.utc.localize(datetime.datetime.utcnow())
         locale_now = utc_now.astimezone(pytz.timezone(timezone)) # localize the time
-        if(debugging):
-            print("Current time:", locale_now.time())
+        print("Current time:", locale_now.time())
 
         # get the schedule times as datetime objects:
         onTime = datetime.datetime.strptime(config['SCHEDULE']['Turn On'], '%H:%M:%S')
@@ -249,33 +228,27 @@ def tv_control(): # cec-based TV control / schedule
         # see if the time is within the on and off time:
         if (locale_now.time() > onTime.time()) and not (locale_now.time() > offTime.time()):
             # turn on the tv
-            if(debugging):
-                print(locale_now.time(), ": Turn on the TV")
+            print(locale_now.time(), ": Turn on the TV")
             cec_control(state = 'on')
 
         elif (locale_now.time() > offTime.time()):
             # turn off the tv
-            if(debugging):
-                print(locale_now.time(), ": Turn off the TV")
+            print(locale_now.time(), ": Turn off the TV")
             cec_control(state = 'off')
 
 
 def cec_control(state = 'Off'):
     try:
-        if(debugging):
-            print('TV is on?', tv.is_on())
+        print('TV is on?', tv.is_on())
         if tv.is_on() and (state == 'Off' or state == 'off'):
-            if(debugging):
-                print("Turning the TV Off")
+            print("Turning the TV Off")
             tv.standby()
 
         if (not tv.is_on()) and (state == 'On' or state == 'on'):
-            if(debugging):
-                print("Turning the TV On")
+            print("Turning the TV On")
             tv.power_on()
     except OSError as e:
-        if(debugging):
-            print("TV Doesn't appear to support CEC, please disable it in the settings:\n", e)
+        print("TV Doesn't appear to support CEC, please disable it in the settings:\n", e)
 
 if __name__ == "__main__":
     # use system arg var to be the working directory:
