@@ -78,7 +78,7 @@ def conf_load():
         config['SCREEN CONF'] = {
             'Width':'1920',
             'Height':'1080',
-            'current show':'Show_0000000000.mp4'
+            'current video':'Show_0000000000.mp4'
         }
         config['SCHEDULE'] = {
             '# If your screen supports HDMI CEC, these can be used:':None,
