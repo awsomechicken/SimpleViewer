@@ -56,7 +56,7 @@ def main_prog(workingDir = '/home/pi/SimpleViewer/simpleviewer/'):
         play_video()
 
 # Workers ______________________________________________________________________
-
+def conf_load():
     print("load conf")
     global config
     confPath = Path("./config")
