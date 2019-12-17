@@ -263,9 +263,9 @@ def cec_control(state = 'Off'):
 if __name__ == "__main__":
     # use system arg var to be the working directory:
     while True:
-	    try:
-		    specifiedDir = sys.argv[1]
-		    main_prog(workingDir = specifiedDir)
-	    except:
-		    print('No Directory Specified, using default.\n To change form default, specify the directory where \"main.py\" resides: ~$ ./main.py /path/to/main/')
-		    main_prog() # now just call the main program
+        try:
+            specifiedDir = sys.argv[1]
+	    main_prog(workingDir = specifiedDir)
+        except:
+	    print('No Directory Specified, using default.\n To change form default, specify the directory where \"main.py\" resides: ~$ ./main.py /path/to/main/')
+	    main_prog() # now just call the main program
