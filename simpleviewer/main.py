@@ -211,7 +211,7 @@ def play_video():
             done = get_video(filename) # get the new video
             player.quit()
             video_to_play = filename
-            player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop', -'--layer', '1'])
+            player = OMXPlayer(video_to_play, args=['--win', '0 0 %s %s'%(width, height), '--loop'])
             print("File to play:", video_to_play)
 
         check_for_settings_change() # check the server for updated settings
@@ -262,9 +262,10 @@ def cec_control(state = 'Off'):
 
 if __name__ == "__main__":
     # use system arg var to be the working directory:
-    try:
-        specifiedDir = sys.argv[1]
-        main_prog(workingDir = specifiedDir)
-    except:
-        print('No Directory Specified, using default.\n To change form default, specify the directory where \"main.py\" resides: ~$ ./main.py /path/to/main/')
-        main_prog() # now just call the main program
+    while True:
+	    try:
+		    specifiedDir = sys.argv[1]
+		    main_prog(workingDir = specifiedDir)
+	    except:
+		    print('No Directory Specified, using default.\n To change form default, specify the directory where \"main.py\" resides: ~$ ./main.py /path/to/main/')
+		    main_prog() # now just call the main program
